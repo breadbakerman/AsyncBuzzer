@@ -440,10 +440,6 @@ Example pattern file (`alarm.pat`):
 - `config.h` (optional, auto-detected for project-specific settings)
 - `SDCard.h` (optional, auto-detected for SD card file playback)
 
-## License
-
-MIT License - Copyright (c) 2025 by breadbaker
-
 ## Notes
 
 - Always call `AsyncBuzzer::update()` in your main loop for proper non-blocking operation
@@ -453,3 +449,7 @@ MIT License - Copyright (c) 2025 by breadbaker
 - Pattern pulse delay accounts for the last beep's duration to ensure accurate timing
 - Use pin 255 to disable the buzzer functionality
 - The library automatically handles pin mode configuration
+
+## License
+
+MIT License - Copyright (c) 2025 by breadbaker
