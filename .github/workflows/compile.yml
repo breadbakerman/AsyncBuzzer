@@ -28,7 +28,9 @@ jobs:
           void loop() {
             AsyncBuzzer::update();
           }
-          EOF      # Test that the library compiles by creating a minimal sketch
+          EOF
+
+      # Test that the library compiles by creating a minimal sketch
       - name: Test Library Compilation
         uses: arduino/compile-sketches@v1
         with:
