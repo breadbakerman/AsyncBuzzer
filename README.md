@@ -5,37 +5,14 @@ A non-blocking Arduino library for controlling buzzers with support for beeps, p
 ## Features
 
 - **Non-blocking operation**: Uses `update()` calls instead of `delay()` for timing
-- **Multiple sound types**: Single beeps, pulse sequences, pattern sequences, melody playback, and tone sequence playback (via SD card)
-- **Pattern support**: Play complex sequences of ## Notes
-
-- Always call `AsyncBuzzer::update()` in your main loop for proper non-blocking operation
-- Use pin 255 to disable the buzzer functionality
-- The library automatically handles pin mode configuration
-- Sound file playback is blocking and uses `delay()` internally
-- Non-blocking pulse sequences, patterns, and melodies require regular `update()` calls to function properly
-- Pattern and melody arrays must persist in memory (use global/static variables, not local arrays)
-- Starting a new pattern or pulse automatically stops any current pattern
+- **Multiple sound types**: Single beeps, pulse sequences, pattern sequences, melody playback, and tone sequence playback
 - **Melody independence**: Melodies play independently and don't interfere with beep, pulse, or pattern functions
-- **File loading**: Use `loadTones()` and `loadPattern()` to load from SD card, then play with `melody()` or `pattern()`
-- **Memory limits**: Melody arrays are limited by `BUZZER_MAX_MELODY_TONES`, pattern arrays by `BUZZER_MAX_PATTERN_PULSES`
-- Pattern pulse delay accounts for the last beep's duration to ensure accurate timing
-- Each tone now has its own rest period - no more global interval setting
-- The `rest` field in `Tone` provides more precise control over timing between individual tones with configurable delays
-- **Melody support**: Play sequences of tones with individual timing control, independent of other sound functions
-- **File loading**: Load melodies and patterns from SD card files with simple text formats
 - **Individual tone control**: Each tone can have its own rest period for precise timing control
-- **Configurable tones**: Separate settings for acknowledgment and error sounds
-- **SD card support**: Play sound files from SD card (optional)
-
-## Recent Improvements
-
-- **Enhanced Tone Structure**: Added `rest` field to `Tone` struct for individual tone rest periods
-- **Simplified Configuration**: Removed global `interval` from `Config` - rest is now tone-specific
-- **Better Pattern Control**: More precise timing control for complex sound sequences
-- **Cleaner API**: More intuitive parameter structure with tone-specific settings
-- **Melody System**: Added independent melody playback that doesn't interfere with beeps, pulses, or patterns
-- **File Loading**: Added functions to load melodies and patterns from SD card files
-- **Configurable Limits**: Added `BUZZER_MAX_MELODY_TONES` and `BUZZER_MAX_PATTERN_PULSES` constants
+- **Pattern support**: Play complex sequences of pulse groups with configurable delays
+- **SD card support**: Load melodies and patterns from SD card files with simple text formats (optional)
+- **Configurable settings**: Separate settings for acknowledgment and error sounds
+- **Memory efficient**: Configurable limits for melody and pattern arrays
+- **Hardware flexible**: Use pin 255 to disable buzzer functionality, automatic pin mode configuration
 
 ## Installation
 
@@ -44,7 +21,7 @@ A non-blocking Arduino library for controlling buzzers with support for beeps, p
 
 ## Configuration
 
-The library can be configured through compile-time definitions in your `config.h` or before including the header:
+The library can be configured through compile-time definitions in an optinal `config.h` or before including the header:
 
 ```cpp
 #define BUZZER_USE_SD            // Enable SD card support (requires SDCard library)
@@ -62,6 +39,8 @@ The library can be configured through compile-time definitions in your `config.h
 ```
 
 ## API Reference
+
+Many functions accept optional flags to control their behavior and timing.
 
 ### Setup Functions
 
@@ -144,6 +123,7 @@ uint8_t loadTones(const String &path, Tone *tones, uint8_t flags = BUZ_NONE);
 
 ### Update Function
 
+Non-blocking pulse sequences, patterns, and melodies require regular `update()` calls to function properly.
 ```cpp
 // Must be called regularly in main loop for non-blocking operation
 bool update();
@@ -300,7 +280,7 @@ void setup() {
 ### Melody Playback
 
 ```cpp
-// Define melody arrays as global/static for persistence
+// Define melody as Tone array
 AsyncBuzzer::Tone imperialMarch[BUZZER_MAX_MELODY_TONES];
 AsyncBuzzer::Tone twinkleTwinkle[] = {
     AsyncBuzzer::Tone(262, 400, 100),  // C4
@@ -352,6 +332,8 @@ void loadAndPlayAlarm() {
 ```
 
 ### Sound File Playback (with SD support)
+
+The playFile function supports the same format as melody files but plays them immediately using blocking delays. The key difference is that it reads a file line by line, allowing melodies of any length to be played.
 
 ```cpp
 // Sound file format:
@@ -427,19 +409,11 @@ Example pattern file (`alarm.pat`):
 4, 2000, 150, 100
 ```
 
-### Legacy Play Files (for playFile function)
-
-The original playFile function supports the same format as melody files but plays them immediately using blocking delays. The key difference is that it reads the file line by line, allowing melodies of any length to be played.
-
 ## Dependencies
 
 - Arduino core libraries
 - `config.h` (optional, auto-detected for project-specific settings)
 - `SDCard.h` (optional, auto-detected for SD card file playback)
-
-## Internal Functions
-
-The library includes a built-in string splitting function for parsing comma-separated values from SD card files. This eliminates external dependencies while maintaining full functionality.
 
 ## License
 
@@ -448,12 +422,9 @@ MIT License - Copyright (c) 2025 by breadbaker
 ## Notes
 
 - Always call `AsyncBuzzer::update()` in your main loop for proper non-blocking operation
+- Starting a new pattern or pulse automatically stops any current pattern
+- Sound file playback is blocking and uses `delay()` internally
+- Memory limits: Melody arrays are limited by `BUZZER_MAX_MELODY_TONES`, pattern arrays by `BUZZER_MAX_PATTERN_PULSES`
+- Pattern pulse delay accounts for the last beep's duration to ensure accurate timing
 - Use pin 255 to disable the buzzer functionality
 - The library automatically handles pin mode configuration
-- Sound file playback is blocking and uses `delay()` internally
-- Melody is non-blocking but limited to BUZZER_MAX_MELODY_TONES
-- Non-blocking pulse sequences and patterns require regular `update()` calls to function properly
-- Starting a new pattern or pulse automatically stops any current pattern
-- Pattern pulse delay accounts for the last beep's duration to ensure accurate timing
-- Each tone now has its own rest period
-- The `rest` field in `Tone` provides more precise control over timing between individual tones
