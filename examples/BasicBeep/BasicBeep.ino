@@ -6,7 +6,7 @@
 
   Circuit:
   - Connect a piezo buzzer between pin 2 and GND
-  - Or use any digital pin and update the BUZZER_PIN below
+  - Or use any digital pin and update the pin number below
 
   Created by breadbaker, 2025
   This example code is in the public domain.
@@ -14,7 +14,7 @@
 
 #include <AsyncBuzzer.h>
 
-const uint8_t BUZZER_PIN = 2; // Pin connected to buzzer
+const uint8_t BUZZER_OUTPUT_PIN = 2; // Pin connected to buzzer
 unsigned long lastBeep = 0;
 const unsigned long BEEP_INTERVAL = 2000; // Beep every 2 seconds
 
@@ -23,7 +23,7 @@ void setup()
     Serial.begin(115200);
 
     // Initialize the buzzer on pin 2
-    if (AsyncBuzzer::setup(BUZZER_PIN))
+    if (AsyncBuzzer::setup(BUZZER_OUTPUT_PIN))
     {
         Serial.println("AsyncBuzzer initialized successfully!");
     }
