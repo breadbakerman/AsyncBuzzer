@@ -21,18 +21,14 @@ jobs:
           cat > .github/workflows/test-sketch/test-sketch.ino << 'EOF'
           #include <AsyncBuzzer.h>
 
-          AsyncBuzzer buzzer;
-
           void setup() {
-            buzzer.setup(2);
+            AsyncBuzzer::setup(2);
           }
 
           void loop() {
-            buzzer.update();
+            AsyncBuzzer::update();
           }
-          EOF
-
-      # Test that the library compiles by creating a minimal sketch
+          EOF      # Test that the library compiles by creating a minimal sketch
       - name: Test Library Compilation
         uses: arduino/compile-sketches@v1
         with:
