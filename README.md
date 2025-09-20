@@ -20,6 +20,15 @@ A non-blocking Arduino library for controlling buzzers with support for beeps, p
 1. Copy the `AsyncBuzzer` folder to your Arduino libraries directory
 2. Include the header in your sketch: `#include <AsyncBuzzer.h>`
 
+## Examples
+
+The library includes example sketches to demonstrate usage:
+
+- **Beep**: Basic beeping functionality with timed intervals
+- **Pulse**: Pulse patterns with different timing configurations
+
+Access examples in the Arduino IDE via File → Examples → AsyncBuzzer.
+
 ## Configuration
 
 The library can be configured through compile-time definitions in an optinal `config.h` or before including the header:
@@ -38,6 +47,21 @@ The library can be configured through compile-time definitions in an optinal `co
 #define BUZZER_MAX_MELODY_TONES 30    // Maximum number of tones in a melody
 #define BUZZER_MAX_PATTERN_PULSES 20  // Maximum number of pulses in a pattern
 ```
+
+### ANSI Color Configuration
+
+The library supports optional ANSI color codes for serial output. If not defined in your `config.h`, they default to empty strings (no colors). To enable colored output, define these in your `config.h`:
+
+```cpp
+#define ANSI_GRAY "\e[38;5;8m"      // Gray color for log prefixes
+#define ANSI_DEFAULT "\e[1;37m"     // Default white color
+#define ANSI_YELLOW "\e[38;5;11m"   // Yellow color for values
+#define ANSI_ERROR "\e[38;5;9m"     // Red color for errors
+#define ANSI_CURSORUP "\e[1A"       // Move cursor up (for file playback)
+#define ANSI_CLEAREOL "\e[0K"       // Clear to end of line
+```
+
+The library automatically provides fallback empty definitions if these are not defined, ensuring compilation compatibility regardless of whether color support is configured.
 
 ## API Reference
 
