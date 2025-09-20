@@ -1,4 +1,4 @@
-name: Library Validation
+name: Library Compile Test
 
 # The workflow will run on every push and pull request to the repository
 on:
@@ -6,7 +6,7 @@ on:
   - pull_request
 
 jobs:
-  validate-library:
+  compile-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,8 +14,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      # Validate Arduino library structure and metadata
-      - name: Validate Arduino Library
-        uses: arduino/arduino-lint-action@v1
+      # Create a minimal test sketch
+      - name: Create test sketch
+        run: |
+          mkdir -p .github/workflows/test-sketch
+          cat > .github/workflows/test-sketch/test-sketch.ino << 'EOF'
+          #include <AsyncBuzzer.h>
+
+          AsyncBuzzer buzzer;
+
+          void setup() {
+            buzzer.setup(2);
+          }
+
+          void loop() {
+            buzzer.update();
+          }
+          EOF
+
+      # Test that the library compiles by creating a minimal sketch
+      - name: Test Library Compilation
+        uses: arduino/compile-sketches@v1
         with:
-          library-manager: update
+          fqbn: arduino:avr:uno
+          sketch-paths: |
+            # Test compilation with a minimal sketch
+            - .github/workflows/test-sketch
+          libraries: |
+            # Use this library
+            - source-path: ./
+              name: AsyncBuzzer
