@@ -14,30 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      # Create a minimal test sketch
-      - name: Create test sketch
-        run: |
-          mkdir -p .github/workflows/test-sketch
-          cat > .github/workflows/test-sketch/test-sketch.ino << 'EOF'
-          #include <AsyncBuzzer.h>
-
-          void setup() {
-            AsyncBuzzer::setup(2);
-          }
-
-          void loop() {
-            AsyncBuzzer::update();
-          }
-          EOF
-
-      # Test that the library compiles by creating a minimal sketch
+      # Test that the library compiles by compiling example sketches
       - name: Test Library Compilation
         uses: arduino/compile-sketches@v1
         with:
           fqbn: arduino:avr:uno
           sketch-paths: |
-            # Test compilation with a minimal sketch
-            - .github/workflows/test-sketch
+            # Compile all example sketches
+            - examples/
           libraries: |
             # Use this library
             - source-path: ./
