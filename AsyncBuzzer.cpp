@@ -10,26 +10,6 @@ MIT License */
 #endif
 #endif
 
-// Define ANSI color codes if not already defined
-#ifndef ANSI_GRAY
-#define ANSI_GRAY ""
-#endif
-#ifndef ANSI_DEFAULT
-#define ANSI_DEFAULT ""
-#endif
-#ifndef ANSI_YELLOW
-#define ANSI_YELLOW ""
-#endif
-#ifndef ANSI_ERROR
-#define ANSI_ERROR ""
-#endif
-#ifndef ANSI_CURSORUP
-#define ANSI_CURSORUP ""
-#endif
-#ifndef ANSI_CLEAREOL
-#define ANSI_CLEAREOL ""
-#endif
-
 #define BUZ_LOG_PREFIX ANSI_GRAY "[Buzzer] " ANSI_DEFAULT
 
 namespace AsyncBuzzer
