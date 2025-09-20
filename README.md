@@ -1,12 +1,9 @@
-<div style="float:right;">
+<img src="https://gist.githubusercontent.com/breadbakerman/8ca75dd6123b4d2882f26837436ef647/raw/arduino-logo.svg" alt="" style="float:right;margin:0 4px;position:relative;z-index:1;filter:drop-shadow(0 2px 4px #00000088);" />
+<img src="https://gist.githubusercontent.com/breadbakerman/70b7ee4430defddaf4f9323ffb73634c/raw/platformio-logo.svg" alt="" style="float:right;margin:0 4px;position:relative;z-index:1;filter:drop-shadow(0 2px 4px #00000088);" />
 
-![Arduino](https://gist.githubusercontent.com/breadbakerman/8ca75dd6123b4d2882f26837436ef647/raw/arduino-logo.svg)
-![Platform.io](https://gist.githubusercontent.com/breadbakerman/70b7ee4430defddaf4f9323ffb73634c/raw/platformio-logo.svg)
-
-</div>
 
 # AsyncBuzzer Library
-[![Library Compile Test](https://github.com/breadbakerman/AsyncBuzzer/actions/workflows/compile.yml/badge.svg)](https://github.com/breadbakerman/AsyncBuzzer/actions/workflows/compile.yml)
+[<img src="https://github.com/breadbakerman/AsyncBuzzer/actions/workflows/compile.yml/badge.svg" alt="" style="filter:drop-shadow(0 2px 4px #00000060);" />](https://github.com/breadbakerman/AsyncBuzzer/actions/workflows/compile.yml)
 
 A non-blocking Arduino library for controlling buzzers with support for beeps, pulses, and tone sequence playback.
 
