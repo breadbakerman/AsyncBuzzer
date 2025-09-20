@@ -1,4 +1,5 @@
 # AsyncBuzzer Library
+[![Library Compile Test](https://github.com/breadbakerman/AsyncBuzzer/actions/workflows/compile.yml/badge.svg)](https://github.com/breadbakerman/AsyncBuzzer/actions/workflows/compile.yml)
 
 A non-blocking Arduino library for controlling buzzers with support for beeps, pulses, and tone sequence playback.
 
