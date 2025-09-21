@@ -1,0 +1,54 @@
+{
+  "name": "AsyncBuzzer",
+  "version": "1.0.0",
+  "description": "Non-blocking Arduino library for controlling buzzers with support for beeps, pulses, tone sequence playback, patterns, and melodies with optional SD card support",
+  "keywords": [
+    "buzzer",
+    "sound",
+    "audio",
+    "beep",
+    "tone",
+    "melody",
+    "pattern",
+    "non-blocking",
+    "async",
+    "pulse",
+    "sd-card"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/breadbakerman/AsyncBuzzer.git"
+  },
+  "authors": [
+    {
+      "name": "breadbaker",
+      "email": "breadbaker@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/breadbakerman/AsyncBuzzer",
+  "frameworks": ["arduino"],
+  "platforms": [
+    "atmelavr",
+    "atmelsam"
+  ],
+  "examples": [
+    {
+      "name": "Beep",
+      "base": "examples/Beep",
+      "files": ["Beep.ino"]
+    },
+    {
+      "name": "Pulse",
+      "base": "examples/Pulse",
+      "files": ["Pulse.ino"]
+    }
+  ],
+  "export": {
+    "exclude": [
+      ".github",
+      ".gitignore"
+    ]
+  }
+}
