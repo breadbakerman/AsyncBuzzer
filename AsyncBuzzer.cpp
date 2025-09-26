@@ -296,6 +296,7 @@ namespace AsyncBuzzer
             noTone(config.pin);
     }
 
+#ifdef BUZZER_USE_SD
     static uint8_t split(char *input, char **output, uint8_t max_elements)
     {
         for (uint8_t i = 0; i < max_elements; ++i)
@@ -337,6 +338,7 @@ namespace AsyncBuzzer
         }
         return count;
     }
+#endif
 
     uint8_t loadPattern(const String &path, Pulse *pulses, uint8_t flags)
     {
